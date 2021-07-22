@@ -1,4 +1,5 @@
 const os = require("os");
+const fs = require("fs");
 
 const actions = require("@actions/core");
 const cache = require("@actions/tool-cache")
@@ -60,7 +61,12 @@ async function run() {
             x.split("/")[7].slice(1),
         ]))
         .then((x) => cache.cacheFile(x[0], `zigmod${extMap[os.platform()]}`, "zigmod", `0.${x[1]}.0`))
-        .then((x) => actions.addPath(x))
+        .then((x) => {
+            if (os.platform() != 'win32') {
+                fs.chmodSync(x, 0755);
+            }
+            actions.addPath(x);
+        })
         .catch((err) => {
             console.error(err.stack);
             actions.setFailed(err.message);

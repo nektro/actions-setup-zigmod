@@ -11851,6 +11851,7 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 const os = __nccwpck_require__(2087);
+const fs = __nccwpck_require__(5747);
 
 const actions = __nccwpck_require__(2186);
 const cache = __nccwpck_require__(7784)
@@ -11912,7 +11913,12 @@ async function run() {
             x.split("/")[7].slice(1),
         ]))
         .then((x) => cache.cacheFile(x[0], `zigmod${extMap[os.platform()]}`, "zigmod", `0.${x[1]}.0`))
-        .then((x) => actions.addPath(x))
+        .then((x) => {
+            if (os.platform() != 'win32') {
+                fs.chmodSync(x, 0755);
+            }
+            actions.addPath(x);
+        })
         .catch((err) => {
             console.error(err.stack);
             actions.setFailed(err.message);
