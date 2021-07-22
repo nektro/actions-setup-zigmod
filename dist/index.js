@@ -11912,7 +11912,7 @@ async function run() {
             // ex: https://github.com/nektro/zigmod/releases/download/v59/zigmod-aarch64-linux
             x.split("/")[7].slice(1),
         ]))
-        .then((x) => cache.cacheFile(x[0], `zigmod${extMap[os.platform()]}`, "zigmod", `0.${x[1]}.0`))
+        .then((x) => cache.cacheFile(x[0], `zigmod${extMap[os.platform()]}`, "zigmod", `0.${x[1]}.1`))
         .then((x) => {
             if (os.platform() != 'win32') {
                 fs.chmodSync(x, 0755);
