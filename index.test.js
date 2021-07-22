@@ -1,1 +1,3 @@
-const os = require("os");
+test("success", async () => {
+    //
+});
