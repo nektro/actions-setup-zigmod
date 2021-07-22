@@ -3,4 +3,4 @@ description: 'Use Zigmod package manager in your @ziglang Github Actions workflo
 author: nektro
 runs:
   using: 'node12'
-  main: 'dist/index.js'
+  main: 'index.js'
