@@ -1,6 +1,9 @@
 name: 'Setup Zigmod'
 description: 'Use Zigmod package manager in your @ziglang Github Actions workflows'
 author: nektro
+branding:
+  icon: aperture
+  color: purple
 runs:
   using: 'node12'
   main: 'dist/index.js'
