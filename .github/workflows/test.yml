@@ -3,8 +3,7 @@ on:
   pull_request:
   push:
     branches:
-      - main
-      - 'releases/*'
+      - v1
 
 jobs:
   # unit tests
