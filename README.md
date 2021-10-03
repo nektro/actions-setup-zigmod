@@ -11,7 +11,7 @@ https://github.com/ziglang/zig
 ```yaml
 - uses: goto-bus-stop/setup-zig@v1
 
-- uses: nektro/setup-zigmod@v1
+- uses: nektro/actions-setup-zigmod@v1
 
 - run: zigmod ci
 
