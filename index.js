@@ -48,14 +48,29 @@ const extMap = {
 
 // most @actions toolkit packages have async methods
 async function run() {
+	const version = core.getInput("version");
+	core.notice(`Version requested: ${version}`);
+	if (typeof version !== 'string') {
+		return runDefault();
+	} else {
+		const url = `https://github.com/nektro/zigmod/releases/download/v${version}/zigmod-${archMap[os.arch()]}-${osMap[os.platform()]}`;
+		return downloadAndInstall(url);
+	}
+}
+
+async function runDefault() {
     return octokit.repos.listReleases({ owner: "nektro", repo: "zigmod" })
         .then((x) => x.data[0].assets)
         .then((x) => x.map(v => v.browser_download_url))
         .then((x) => x.filter(v => v.includes(archMap[os.arch()])))
         .then((x) => x.filter(v => v.includes(osMap[os.platform()])))
         .then((x) => x[0])
-        .then((x) => Promise.all([
-            cache.downloadTool(x),
+	.then(downloadAndInstall);
+}
+
+async function downloadAndInstall(url) {
+	Promise.all([
+	    cache.downloadTool(url),
             // pick version back out of url
             // ex: https://github.com/nektro/zigmod/releases/download/v59/zigmod-aarch64-linux
             x.split("/")[7].slice(1),
