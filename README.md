@@ -9,7 +9,10 @@ https://github.com/ziglang/zig
 ## Usage
 
 ```yaml
-- uses: goto-bus-stop/setup-zig@v1
+- uses: mlugg/setup-zig@v1
+  with:
+    mirror: http://mirrors.nektro.net/s3cgi
+    version: 0.14.0
 
 - uses: nektro/actions-setup-zigmod@v1
 
