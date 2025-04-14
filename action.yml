@@ -7,3 +7,7 @@ branding:
 runs:
   using: 'node12'
   main: 'dist/index.js'
+inputs:
+  version:
+    description: 'Version of Zigmod to download, e.g. "r94". Leave empty to use the latest version.'
+    default: ''

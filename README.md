@@ -15,6 +15,8 @@ https://github.com/ziglang/zig
     version: 0.14.0
 
 - uses: nektro/actions-setup-zigmod@v1
+  with:
+    version: r94
 
 - run: zigmod ci
 

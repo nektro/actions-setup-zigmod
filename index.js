@@ -49,7 +49,11 @@ const extMap = {
 // most @actions toolkit packages have async methods
 async function run() {
     return octokit.repos.listReleases({ owner: "nektro", repo: "zigmod" })
-        .then((x) => x.data[0].assets)
+        .then((x) => {
+            const requested_version = core.getInput('version');
+            if (!requested_version) return x.data[0].assets;
+            return x.data.filter(v => v.tag_name === requested_version)[0].assets;
+        })
         .then((x) => x.map(v => v.browser_download_url))
         .then((x) => x.filter(v => v.includes(archMap[os.arch()])))
         .then((x) => x.filter(v => v.includes(osMap[os.platform()])))
