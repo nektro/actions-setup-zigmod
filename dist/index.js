@@ -11902,7 +11902,7 @@ const extMap = {
 async function run() {
     return octokit.repos.listReleases({ owner: "nektro", repo: "zigmod" })
         .then((x) => {
-            const requested_version = core.getInput('version');
+            const requested_version = actions.getInput('version');
             if (!requested_version) return x.data[0].assets;
             return x.data.filter(v => v.tag_name === requested_version)[0].assets;
         })
