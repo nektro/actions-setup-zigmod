@@ -9,6 +9,7 @@ const { throttling } = require("@octokit/plugin-throttling");
 const OctokitImpl = Octokit.plugin(throttling);
 
 const octokit = new OctokitImpl({
+    auth: process.env.GITHUB_TOKEN,
     throttle: {
         onRateLimit: (retryAfter, options) => {
             octokit.log.warn(
