@@ -4,6 +4,10 @@ author: nektro
 branding:
   icon: aperture
   color: purple
+inputs:
+  version:
+    description: 'zigmod version'
+    required: false
 runs:
   using: 'node12'
   main: 'dist/index.js'
